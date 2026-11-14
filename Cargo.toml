@@ -1,0 +1,24 @@
+[package]
+name = "medvault_crypto"
+version = "0.1.0"
+edition = "2021"
+description = "Hardened constant-time threshold cryptography engine for MedVault (3-of-4 Vandermonde, Feldman VSS, Proactive Refresh)"
+authors = ["MedVault Team"]
+
+[lib]
+name = "medvault_crypto"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3 = { version = "0.20", features = ["extension-module"], optional = true }
+subtle = "2.5"
+zeroize = { version = "1.7", features = ["derive"] }
+num-bigint = { version = "0.4", features = ["rand"] }
+num-traits = "0.2"
+rand = "0.8"
+sha2 = "0.10"
+aes-gcm = "0.10"
+
+[features]
+default = []
+python = ["pyo3"]
