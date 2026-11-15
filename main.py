@@ -6,13 +6,22 @@ from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from backend.blind_llm.pipeline import BlindLLMPipeline
-from backend.blind_llm.entity_detector import EntityDetector
-from backend.blind_llm.doc_extractor import extract_text_from_file
-from backend.crypto.field import generate_random_scalar, Q, G
-from backend.crypto.vandermonde import generate_vandermonde_shares, Share
-from backend.crypto.feldman_vss import compute_commitments, verify_share
-from backend.crypto.lagrange import reconstruct_secret
+try:
+    from backend.blind_llm.pipeline import BlindLLMPipeline
+    from backend.blind_llm.entity_detector import EntityDetector
+    from backend.blind_llm.doc_extractor import extract_text_from_file
+    from backend.crypto.field import generate_random_scalar, Q, G
+    from backend.crypto.vandermonde import generate_vandermonde_shares, Share
+    from backend.crypto.feldman_vss import compute_commitments, verify_share
+    from backend.crypto.lagrange import reconstruct_secret
+except ModuleNotFoundError:
+    from blind_llm.pipeline import BlindLLMPipeline
+    from blind_llm.entity_detector import EntityDetector
+    from blind_llm.doc_extractor import extract_text_from_file
+    from crypto.field import generate_random_scalar, Q, G
+    from crypto.vandermonde import generate_vandermonde_shares, Share
+    from crypto.feldman_vss import compute_commitments, verify_share
+    from crypto.lagrange import reconstruct_secret
 
 app = FastAPI(
     title="BlindLLM API",
