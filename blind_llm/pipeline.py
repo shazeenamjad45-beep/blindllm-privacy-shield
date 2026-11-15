@@ -7,13 +7,22 @@ from typing import List, Dict, Optional, Any, Tuple
 import urllib.request
 import urllib.error
 
-from backend.crypto.field import generate_random_scalar, Q, G
-from backend.crypto.vandermonde import generate_vandermonde_shares, Share
-from backend.crypto.feldman_vss import compute_commitments, verify_share
-from backend.crypto.lagrange import reconstruct_secret
-from backend.crypto.aes_gcm import encrypt_record, decrypt_record
-from backend.crypto.zeroize import zeroize_bytearray
-from backend.blind_llm.entity_detector import EntityDetector, DetectedEntity
+try:
+    from backend.crypto.field import generate_random_scalar, Q, G
+    from backend.crypto.vandermonde import generate_vandermonde_shares, Share
+    from backend.crypto.feldman_vss import compute_commitments, verify_share
+    from backend.crypto.lagrange import reconstruct_secret
+    from backend.crypto.aes_gcm import encrypt_record, decrypt_record
+    from backend.crypto.zeroize import zeroize_bytearray
+    from backend.blind_llm.entity_detector import EntityDetector, DetectedEntity
+except ModuleNotFoundError:
+    from crypto.field import generate_random_scalar, Q, G
+    from crypto.vandermonde import generate_vandermonde_shares, Share
+    from crypto.feldman_vss import compute_commitments, verify_share
+    from crypto.lagrange import reconstruct_secret
+    from crypto.aes_gcm import encrypt_record, decrypt_record
+    from crypto.zeroize import zeroize_bytearray
+    from blind_llm.entity_detector import EntityDetector, DetectedEntity
 
 # Auto-load .env file if present
 def _load_env_file():
